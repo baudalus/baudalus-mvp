@@ -1,6 +1,15 @@
-version: "3.9"
+version: "3.3"
 services:
   web:
     build: .
-    ports:
-      - "80:3000"
+    networks:
+      - nginx-proxy
+      - default
+    environment:
+      - VIRTUAL_HOST=baudalus.com
+      - LETSENCRYPT_HOST=baudalus.com
+      - LETSENCRYPT_EMAIL=webmaster@baudalus.com
+      - VIRTUAL_PORT=3000
+networks:
+  nginx-proxy:
+    external: true
