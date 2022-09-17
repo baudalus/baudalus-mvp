@@ -37,10 +37,10 @@ export default defineComponent({
       query: "",
       projects: [
         {name: "DSV Logistik", place: "Krefeld"},
+        {name: "Tesla Giga Factory", place: "Grünheide"},
         {name: "Gateway Gardens", place: "Frankfurt"},
         {name: "Northgate", place: "Berlin"},
         {name: "Schüco Welcome Forum", place: "Bielefeld"},
-        {name: "Tesla Giga Factory", place: "Grünheide"},
       ]
     }
   },
@@ -106,15 +106,15 @@ div.item:nth-of-type(1) div.image{
   background-image: url("@/assets/projects/csm_facilityservices_ref_dsvlogistik-krefeld_68310724bd.jpeg");
 }
 div.item:nth-of-type(2) div.image{
-  background-image: url("@/assets/projects/csm_parkhaus_MK8_gateway_gardens_27_886d255e7d.jpg");
+  background-image: url("@/assets/projects/tesla-gigafactory-01.jpeg");
 }
 div.item:nth-of-type(3) div.image{
-  background-image: url("@/assets/projects/csm_parkingservices_referenz_northgate_4c3b2565da.jpeg");
+  background-image: url("@/assets/projects/csm_parkhaus_MK8_gateway_gardens_27_886d255e7d.jpg");
 }
 div.item:nth-of-type(4) div.image{
-  background-image: url("@/assets/projects/csm_Welcome-Forum_Schueco_01_9adb6ba882.jpeg");
+  background-image: url("@/assets/projects/csm_parkingservices_referenz_northgate_4c3b2565da.jpeg");
 }
 div.item:nth-of-type(5) div.image{
-  background-image: url("@/assets/projects/tesla-gigafactory-01.jpeg");
+  background-image: url("@/assets/projects/csm_Welcome-Forum_Schueco_01_9adb6ba882.jpeg");
 }
 </style>
