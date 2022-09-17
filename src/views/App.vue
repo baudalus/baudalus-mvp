@@ -1,12 +1,14 @@
 <template>
   <MenuBar/>
   <ButtonPrimary class="add-task">Add task</ButtonPrimary>
-  <VueFlow v-model="elements" class="flow-holder"/>
+  <VueFlow v-model="elements" class="flow-holder">
+    <MiniMap />
+  </VueFlow>
   <InputSelect :options="sites" class="site-select"></InputSelect>
 </template>
 
 <script lang="ts">
-import {VueFlow} from '@braks/vue-flow'
+import {VueFlow, MiniMap} from '@braks/vue-flow'
 
 import {defineComponent} from "vue";
 import ButtonPrimary from "@/components/ButtonPrimary.vue";
@@ -14,11 +16,16 @@ import MenuBar from "@/components/MenuBar.vue";
 import InputSelect from "@/components/InputSelect.vue";
 
 export default defineComponent({
-  components: {InputSelect, MenuBar, ButtonPrimary, VueFlow},
+  components: {InputSelect, MenuBar, ButtonPrimary, VueFlow, MiniMap},
   data() {
     return {
       sites: [
-        {title: "Founders Foundation Building", value: 1}
+        {title: "Founders Foundation", value: 1},
+        {title: "DSV Logistik", value: 1},
+        {title: "Gateway Gardens", value: 1},
+        {title: "Northgate", value: 1},
+        {title: "Schüco Welcome Forum", value: 1},
+        {title: "Tesla Giga Factory", value: 1}
       ],
       elements: [
         // Nodes
@@ -62,5 +69,12 @@ button.add-task {
   bottom: 3rem;
   right: 3rem;
   z-index: 10;
+}
+
+.vue-flow__minimap {
+  display: none;
+  position: fixed;
+  bottom: 3rem;
+  left: 3rem;
 }
 </style>

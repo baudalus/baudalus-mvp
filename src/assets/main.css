@@ -1,5 +1,6 @@
 @import "./css/base.css";
 @import "./css/nodes.css";
+@import "./css/table.css";
 
 /* these are necessary styles for vue flow */
 @import '@braks/vue-flow/dist/style.css';

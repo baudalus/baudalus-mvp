@@ -8,12 +8,14 @@ import ButtonPrimary from "@/components/ButtonPrimary.vue";
     <h1 class="mb-2rem">Login</h1>
     <InputText
         placeholder="Your username"
+        value="bauleiter-andreas"
         class="mb-1rem"/>
     <InputText
         placeholder="Your password"
+        value="meinpasswort"
         type="password"
         class="mb-3rem"/>
-    <ButtonPrimary @click="$router.push('/app')">Login</ButtonPrimary>
+    <ButtonPrimary @click="$router.push('/mysites')">Login</ButtonPrimary>
   </main>
 </template>
 
