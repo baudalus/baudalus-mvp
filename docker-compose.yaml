@@ -9,7 +9,7 @@ services:
       - VIRTUAL_HOST=baudalus.com
       - LETSENCRYPT_HOST=baudalus.com
       - LETSENCRYPT_EMAIL=webmaster@baudalus.com
-      - VIRTUAL_PORT=3000
+      - VIRTUAL_PORT=5173
 networks:
   nginx-proxy:
     external: true
