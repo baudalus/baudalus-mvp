@@ -9,7 +9,10 @@
     "type-check": "vue-tsc --noEmit"
   },
   "dependencies": {
-    "vue": "^3.2.38",
+    "@braks/vue-flow": "^0.4.40",
+    "feather-icons": "^4.29.0",
+    "vue": "^3.2.39",
+    "vue-feather": "^2.0.0",
     "vue-router": "^4.1.5"
   },
   "devDependencies": {
