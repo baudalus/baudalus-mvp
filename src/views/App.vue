@@ -58,7 +58,7 @@ export default defineComponent({
         {title: "Schüco Welcome Forum", value: 1},
         {title: "Tesla Giga Factory", value: 1}
       ],
-      elements: [] as Object[],
+      elements: [] as any[],
       newTask: {
         name: "",
         company: "",
@@ -189,6 +189,7 @@ export default defineComponent({
     },
     chooseDependencies() {
       this.hidePopUp()
+      /*
       TaskHolder.addTask({
         area: "",
         name: this.newTask.name,
@@ -200,6 +201,7 @@ export default defineComponent({
       })
       //TaskHolder.addConnection(28, [125])
       this.elements = this.buildElements()
+       */
     }
   }
 })

@@ -51,8 +51,8 @@ import {defineComponent} from "vue";
 export default defineComponent({
   data() {
     return {
-      name: "",
-      place: "",
+      name: "Founders Foundation",
+      place: "Bielefeld",
       templates: [
         {name: "Storage hall", icon: "arrow-right"},
         {name: "Parking garage", icon: "arrow-right"},
