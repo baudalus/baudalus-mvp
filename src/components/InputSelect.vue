@@ -22,12 +22,14 @@ export default defineComponent({
 
 <style scoped>
 div.select {
+  position: relative;
   background: #ffffff;
   border-radius: var(--border-radius);
   border: 3px solid #efefef;
 }
 select{
-  padding: .95rem 3rem .95rem 2rem;
+  width: 100%;
+  padding: .95rem 1rem;
   font-size: inherit;
   background: #ffffff;
   border: none;

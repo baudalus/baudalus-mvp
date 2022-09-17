@@ -6,36 +6,40 @@
     </div>
     <div class="filter-holder mb-1rem">
       <div class="filter mr-2rem">
-        <input type="checkbox" id="ckbx_erledigt" v-model="ckbx_erledigt">
+        <input type="checkbox" id="ckbx_erledigt" v-model="ckbx_erledigt" @change="filterTasks">
         <label for="ckbx_erledigt">Done</label>
       </div>
       <div class="filter mr-2rem">
-        <input type="checkbox" id="ckbx_warnung" v-model="ckbx_warnung">
+        <input type="checkbox" id="ckbx_warnung" v-model="ckbx_warnung" @change="filterTasks">
         <label for="ckbx_warnung">Warning</label>
       </div>
-      <div class="filter">
-        <input type="checkbox" id="ckbx_problem" v-model="ckbx_problem">
+      <div class="filter mr-2rem">
+        <input type="checkbox" id="ckbx_problem" v-model="ckbx_problem" @change="filterTasks">
         <label for="ckbx_problem">Problem</label>
+      </div>
+      <div class="filter">
+        <input type="checkbox" id="ckbx_no_status" v-model="ckbx_no_status" @change="filterTasks">
+        <label for="ckbx_no_status">No Status</label>
       </div>
     </div>
     <div class="mb-2rem">
-      <InputText v-model="query" placeholder="Search for task"/>
+      <InputText v-model="query" placeholder="Search for task" @input="filterTasks"/>
     </div>
     <table>
       <tr>
         <th>Status</th>
         <th>Name</th>
         <th>Company</th>
-        <th>Location</th>
         <th>Duration</th>
         <th>Start</th>
         <th>End</th>
         <th>Files</th>
       </tr>
       <tr
-          v-for="(task, idx) in filterTasks()"
+          v-for="(task, idx) in filtered_tasks"
           :key="`task_${idx}`"
       >
+        <td class="status none" v-if="task.status === 'NONE'"/>
         <td class="status done" v-if="task.status === 'DONE'">
           <VueFeather type="check"/>
         </td>
@@ -47,13 +51,30 @@
         </td>
         <td>{{ task.name }}</td>
         <td>{{ task.company }}</td>
-        <td>{{ task.location }}</td>
-        <td>{{ task.duration }}d</td>
+        <td>{{ task.duration }}</td>
         <td>01. Oct</td>
         <td>12. Oct</td>
         <td>
-          <img class="preview" src="@/assets/projects/csm_facilityservices_ref_dsvlogistik-krefeld_68310724bd.jpeg" alt="preview">
-          <img class="preview" src="@/assets/projects/csm_parkhaus_MK8_gateway_gardens_27_886d255e7d.jpg" alt="preview">
+          <img
+              class="preview"
+              src="@/assets/projects/csm_Welcome-Forum_Schueco_01_9adb6ba882.jpeg"
+              alt="preview"
+              v-if="task.status !== 'NONE' && Math.random() > .95">
+          <img
+              class="preview"
+              src="@/assets/projects/csm_parkingservices_referenz_northgate_4c3b2565da.jpeg"
+              alt="preview"
+              v-if="task.status !== 'NONE' && Math.random() > .85">
+          <img
+              class="preview"
+              src="@/assets/projects/csm_parkhaus_MK8_gateway_gardens_27_886d255e7d.jpg"
+              alt="preview"
+              v-if="task.status !== 'NONE' && Math.random() > .75">
+          <img
+              class="preview"
+              src="@/assets/projects/csm_facilityservices_ref_dsvlogistik-krefeld_68310724bd.jpeg"
+              alt="preview"
+              v-if="task.status !== 'NONE' && Math.random() > .7">
         </td>
       </tr>
     </table>
@@ -67,6 +88,8 @@ import {defineComponent} from "vue";
 import ButtonPrimary from "@/components/ButtonPrimary.vue";
 import MenuBar from "@/components/MenuBar.vue";
 import InputText from "@/components/InputText.vue";
+import {TaskHolder} from "@/typescript/taskholder";
+import type {Task} from "@/typescript/taskholder";
 
 export default defineComponent({
   components: {InputText, MenuBar, ButtonPrimary, VueFlow},
@@ -76,21 +99,40 @@ export default defineComponent({
       ckbx_erledigt: true,
       ckbx_warnung: true,
       ckbx_problem: true,
-      tasks: [
-        {name: "Task 1", status: "DONE", company: "Maler GmbH", location: "Walls left side", duration: 7},
-        {name: "Task 2", status: "WARNING", company: "Boundix GbR", location: "Roof top", duration: 5},
-        {name: "Task 3", status: "PROBLEM", company: "Ill UG", location: "2nd floor", duration: 14},
-      ]
+      ckbx_no_status: true,
+      tasks: [] as Task[],
+      filtered_tasks: [] as Task[]
     }
+  },
+  mounted() {
+    this.tasks = this.filtered_tasks = this.getTasks()
   },
   methods: {
     filterTasks() {
-      return this.tasks.filter(t =>
+      this.filtered_tasks = this.tasks.filter(t =>
           (t.name.toLowerCase().includes(this.query.toLowerCase()) || t.company.toLowerCase().includes(this.query.toLowerCase())) &&
-          (t.status === "DONE" && this.ckbx_erledigt
+          (t.status === "NONE" && this.ckbx_no_status
+              || t.status === "DONE" && this.ckbx_erledigt
               || t.status === "WARNING" && this.ckbx_warnung
               || t.status === "PROBLEM" && this.ckbx_problem)
       )
+    },
+    getTasks(): Task[] {
+      const tasks = TaskHolder.getUsedTasks()
+      let counter = 0
+      tasks.forEach(t => {
+        if (counter <= 5)
+          t.status = "DONE"
+        else if (counter > 5 && counter <= 9)
+          t.status = "WARNING"
+        else if (counter > 9 && counter <= 11)
+          t.status = "PROBLEM"
+        else
+          t.status = "NONE"
+        counter++
+      })
+      console.log(tasks)
+      return tasks as Task[]
     }
   }
 })

@@ -1,3 +1,13 @@
+export interface Task {
+    area: string
+    name: string
+    duration: string
+    company: string
+    start: string
+    end: string
+    status: string
+}
+
 export class TaskHolder {
 
     /**
@@ -35,16 +45,29 @@ export class TaskHolder {
     /**
      * Adds a new task.
      */
-    static addTask(task: { area: string, name: string, duration: string, company: string, start: string, end: string }) {
+    static addTask(task: Task) {
         this.tasks.push(task)
     }
 
     /**
      * Adds a new task.
      */
-    static addConnection(id: string, connections: []) {
+    static addConnection(id: number, connections: number[]) {
         // @ts-ignore
-        this.tasks[id] = connections
+        this.connections[id] = connections
+    }
+
+    /**
+     * Returns the used tasks.
+     */
+    static getUsedTasks() :Task[] {
+        const taskList = this.getTasks()
+        console.log(taskList)
+        const tasks = [taskList[0]]
+        // @ts-ignore
+        Object.keys(this.connections).forEach(id => tasks.push(taskList[id]))
+
+        return tasks as Task[]
     }
 
     /**
@@ -57,7 +80,7 @@ export class TaskHolder {
         16: [34],
         42: [44],
         3: [9],
-        4: [5,6,7],
+        4: [5, 6, 7],
         17: [23],
         18: [23],
         19: [20, 21, 22],
@@ -87,8 +110,6 @@ export class TaskHolder {
         50: [51],
         49: [50],
         37: [50],
-        12: [51],
-        28: [51],
     }
 
     /**
@@ -507,7 +528,7 @@ export class TaskHolder {
         },
         {
             "area": "",
-            "name": "Übergabe am<br><strong>04. Juni 2024</strong>",
+            "name": "Deckenträger E7+8/7-1 + Rampendach",
             "duration": "1 Tag?",
             "start": "Die 23.03.21",
             "end": "Die 23.03.21",

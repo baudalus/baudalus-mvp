@@ -1,15 +1,38 @@
 <template>
   <MenuBar/>
-  <ButtonPrimary class="add-task">Add task</ButtonPrimary>
+  <ButtonPrimary class="add-task" @click="displayPopUp">Add task</ButtonPrimary>
+  <div class="status-deadline">
+    <span class="info">Deadline: 29th May 2025</span>
+    <span class="icon">
+      <VueFeather type="check"/>
+    </span>
+  </div>
   <VueFlow
       v-model="elements"
       class="flow-holder"
-      :default-zoom="1"
+      :default-zoom=".2"
       :min-zoom="0.1"
       :max-zoom="3">
     <MiniMap/>
   </VueFlow>
   <InputSelect :options="sites" class="site-select"></InputSelect>
+  <div class="pop-up-background" v-if="showPopUp" @click="hidePopUp">
+    <div class="pop-up" @click.stop>
+      <h2 class="mt-0rem mb-3rem">Create new task</h2>
+      <div class="mb-1rem">
+        <InputText v-model="newTask.name" placeholder="Name of the task"/>
+      </div>
+      <div v-if="newTask.name !== ''" class="mb-1rem">
+        <InputText v-model="newTask.company" placeholder="Company"/>
+      </div>
+      <div v-if="newTask.name !== '' && newTask.company !== ''" class="mb-3rem">
+        <InputSelect :options="durationOptions"/>
+      </div>
+      <ButtonPrimary style="float: right" @click="chooseDependencies"
+                     v-if="newTask.name !== '' && newTask.company !== ''">Next
+      </ButtonPrimary>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -20,11 +43,13 @@ import ButtonPrimary from "@/components/ButtonPrimary.vue";
 import MenuBar from "@/components/MenuBar.vue";
 import InputSelect from "@/components/InputSelect.vue";
 import {TaskHolder} from "@/typescript/taskholder";
+import InputText from "@/components/InputText.vue";
 
 export default defineComponent({
-  components: {InputSelect, MenuBar, ButtonPrimary, VueFlow, MiniMap},
+  components: {InputText, InputSelect, MenuBar, ButtonPrimary, VueFlow, MiniMap},
   data() {
     return {
+      showPopUp: false,
       sites: [
         {title: "Founders Foundation", value: 1},
         {title: "DSV Logistik", value: 1},
@@ -34,24 +59,19 @@ export default defineComponent({
         {title: "Tesla Giga Factory", value: 1}
       ],
       elements: [] as Object[],
-      elementsOld: [
-        // Nodes
-        // An input node, specified by using `type: 'input'`
-        {id: '1', type: 'input', label: 'Node 1', position: {x: 250, y: 5}},
-
-        // Default nodes, you can omit `type: 'default'`
-        {id: '2', label: 'Node 2', position: {x: 100, y: 100},},
-        {id: '3', label: 'Node 3', position: {x: 400, y: 100}},
-
-        // An output node, specified by using `type: 'output'`
-        {id: '4', type: 'output', label: 'Node 4', position: {x: 400, y: 200}},
-
-        // Edges
-        // Most basic edge, only consists of an id, source-id and target-id
-        {id: 'e1-3', source: '1', target: '3'},
-
-        // An animated edge
-        {id: 'e1-2', source: '1', target: '2', animated: true},
+      newTask: {
+        name: "",
+        company: "",
+        duration: "",
+      },
+      durationOptions: [
+        {title: "1 day", value: 1},
+        {title: "2 days", value: 2},
+        {title: "3 days", value: 3},
+        {title: "4 days", value: 4},
+        {title: "5 days", value: 5},
+        {title: "6 days", value: 6},
+        {title: "7 days", value: 7},
       ]
     }
   },
@@ -65,18 +85,28 @@ export default defineComponent({
       let connections = TaskHolder.getConnections()
 
       // get the starting positin
-      const startPosition = {x: Math.floor(window.innerWidth * 0.15), y: Math.floor(window.innerHeight / 2)}
+      const viewMultiplier = 5
+      const startPosition = {
+        x: Math.floor(window.innerWidth * 0.15) * viewMultiplier,
+        y: Math.floor(window.innerHeight / 2) * viewMultiplier
+      }
 
       // define the margins between the elements of a depth level
       const multiplier = 3
-      const margins = [0, 300 * multiplier, 100 * multiplier, 50 * multiplier, 25 * multiplier, 12*multiplier, 6*multiplier, 0]
-      const offsetRight = 300 * 1.5
+      const margins = [0, 300 * multiplier, 100 * multiplier, 50 * multiplier, 25 * multiplier, 12 * multiplier, 6 * multiplier, 0]
+      const offsetRight = 300 * 2.5
 
       // positions of all elements by id
       let positions: { [key: string]: { x: number, y: number } } = {}
 
       // add first element
-      elements.push({id: '1', type: 'input', label: tasks["1"].name, position: startPosition, sourcePosition: Position.Right})
+      elements.push({
+        id: '1',
+        type: 'input',
+        label: tasks["1"].name,
+        position: startPosition,
+        sourcePosition: Position.Right
+      })
       positions["1"] = startPosition
 
       for (const id of Object.keys(connections)) {
@@ -90,8 +120,8 @@ export default defineComponent({
 
           // calculate level in tree
           let level = -1
-          let lastConnectedId: string|number|undefined = nodeId
-          while(lastConnectedId !== undefined) {
+          let lastConnectedId: string | number | undefined = nodeId
+          while (lastConnectedId !== undefined) {
             const connectedBy = TaskHolder.getNodeConnectedBy(Number(lastConnectedId))
             lastConnectedId = connectedBy.length === 0 ? undefined : connectedBy[0]
             level += 1
@@ -103,9 +133,11 @@ export default defineComponent({
           // create node if element not exists already
           if (!(nodeId in positions)) {
 
+            // generate random offset
+            const randomOffset = Math.random() * 200 - 100
             // generate new position
             let newPosition = {
-              x: positions[id].x + offsetRight,
+              x: positions[id].x + offsetRight + randomOffset,
               y: positions[id].y - allNodesHeight / 2 + margins[level] * i - 10
             }
 
@@ -116,7 +148,7 @@ export default defineComponent({
             if (connectedBy.length !== connectdByCreated.length)
               continue
 
-            if (connectedBy.length > 1){
+            if (connectedBy.length > 1) {
               const yPositions = connectedBy.map(c => positions[c].y)
               newPosition.y = yPositions.reduce((pv, cv) => pv + cv, 0) / connectedBy.length;
 
@@ -147,8 +179,27 @@ export default defineComponent({
       }
 
       console.log(elements)
-
       return elements
+    },
+    displayPopUp() {
+      this.showPopUp = true
+    },
+    hidePopUp() {
+      this.showPopUp = false
+    },
+    chooseDependencies() {
+      this.hidePopUp()
+      TaskHolder.addTask({
+        area: "",
+        name: this.newTask.name,
+        company: this.newTask.company,
+        start: "",
+        end: "",
+        status: "NONE",
+        duration: "4 Tage",
+      })
+      //TaskHolder.addConnection(28, [125])
+      this.elements = this.buildElements()
     }
   }
 })
@@ -168,10 +219,15 @@ button.add-task {
 }
 
 .site-select {
-  position: fixed;
+  width: 250px;
+  position: fixed !important;
   bottom: 3rem;
   right: 3rem;
   z-index: 10;
+}
+
+.site-select select {
+  padding: .95rem 5rem .95rem 2rem;
 }
 
 .vue-flow__minimap {
@@ -179,5 +235,45 @@ button.add-task {
   position: fixed;
   bottom: 3rem;
   left: 3rem;
+}
+
+.pop-up-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  z-index: 100;
+}
+
+.pop-up-background .pop-up {
+  position: absolute;
+  top: 50vh;
+  left: 50%;
+  width: 500px;
+  background: #ffffff;
+  transform: translate(-50%, -50%);
+  padding: 3rem 3rem 4rem 3rem;
+}
+
+.status-deadline {
+  position: fixed;
+  top: 2rem;
+  left: 50vw;
+  transform: translateX(-50%);
+  background: #efefef;
+  padding: .6rem 4rem .6rem 2rem;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.status-deadline span.icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: #A8DCD1;
+  padding: .6rem;
 }
 </style>
