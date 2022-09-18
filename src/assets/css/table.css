@@ -37,3 +37,14 @@ table tr td.status.warning {
 table tr:hover {
     cursor: pointer;
 }
+
+
+@media only screen and (max-device-width: 480px) {
+    table {
+        font-size: .75rem;
+    }
+
+    table tr th, table tr td {
+        padding: .35rem .5rem;
+    }
+}

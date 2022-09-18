@@ -5,10 +5,13 @@ import ButtonPrimary from "@/components/ButtonPrimary.vue";
 
 <template>
   <main>
-    <h1 class="mb-2rem">Login</h1>
+    <div class="header">
+      <img src="@/assets/logo.svg" alt="Baudalus Logo"/>
+      <h1 class="mb-2rem">Login</h1>
+    </div>
     <InputText
         placeholder="Your username"
-        value="bauleiter-andreas"
+        value="construction-manager"
         class="mb-1rem"/>
     <InputText
         placeholder="Your password"
@@ -39,5 +42,25 @@ main {
 
 button {
   float: right;
+}
+
+.header img{
+  height: 1.7rem;
+  opacity: 1;
+  margin-top: .5rem;
+  padding-right: 1rem;
+  margin-right: 1rem;
+  border-right: 6px solid #bebebe;
+}
+
+.header h1 {
+  display: inline-block;
+}
+
+@media only screen and (max-device-width: 480px) {
+  main {
+    width: 100%;
+    height: 100vh;
+  }
 }
 </style>

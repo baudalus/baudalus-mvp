@@ -278,4 +278,30 @@ button.add-task {
   background: #A8DCD1;
   padding: .6rem;
 }
+
+@media only screen and (max-device-width: 480px) {
+  .site-select {
+    display: none;
+  }
+
+  .status-deadline{
+    top: unset;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    transform: none;
+    text-align: center;
+  }
+
+  button.add-task {
+    top: unset;
+    bottom: 2.5rem;
+    left: 0;
+    width: 100%;
+  }
+
+  .pop-up-background .pop-up {
+    width: calc(100% - 3rem);
+  }
+}
 </style>

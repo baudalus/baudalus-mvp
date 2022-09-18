@@ -6,27 +6,39 @@ import ButtonPrimary from "@/components/ButtonPrimary.vue";
 <template>
   <main>
     <div class="mb-3rem">
-      <h1>Create New Site</h1>
+      <div class="header">
+        <img src="@/assets/logo.svg" alt="Baudalus Logo"/>
+        <h1 class="mb-2rem">Create New Site</h1>
+      </div>
     </div>
 
-    <div class="details">
-      <div class="mb-3rem">
-        <div>
-          <h2>What?</h2>
-        </div>
-        <div>
-          <InputText v-model="name" placeholder="Enter the name"/>
+    <div class="details mb-2rem">
+      <div>
+        <div class="mb-3rem">
+          <div class="founders-image"/>
         </div>
       </div>
       <div>
-        <div>
-          <h2>Where?</h2>
+        <div class="mb-2rem">
+          <div>
+            <h2>What?</h2>
+          </div>
+          <div>
+            <InputText v-model="name" placeholder="Enter the name"/>
+          </div>
         </div>
         <div>
-          <InputText v-model="place" placeholder="Enter the place"/>
+          <div>
+            <h2>Where?</h2>
+          </div>
+          <div>
+            <InputText v-model="place" placeholder="Enter the place"/>
+          </div>
         </div>
       </div>
     </div>
+
+
 
     <div>
       <h2>Choose template</h2>
@@ -100,10 +112,22 @@ button {
   float: right;
 }
 
+h2 {
+  margin-top: -2rem;
+}
+
 div.details {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 2rem;
+}
+
+div.founders-image {
+  width: 100%;
+  height: 15.6rem;
+  background-image: url("@/assets/founders.jpg");
+  background-size: cover;
+  background-position: center;
 }
 
 div.item-holder {
@@ -168,5 +192,33 @@ div.item:nth-of-type(4) div.image {
 
 div.item:nth-of-type(5) div.image {
   background-image: url("@/assets/projects/tesla-gigafactory-01.jpeg");
+}
+
+.header img{
+  height: 1.7rem;
+  opacity: 1;
+  margin-top: .5rem;
+  padding-right: 1rem;
+  margin-right: 1rem;
+  border-right: 6px solid #bebebe;
+}
+
+.header h1 {
+  display: inline-block;
+  margin: 0;
+}
+
+@media only screen and (max-device-width: 480px) {
+  main {
+    width: 100%;
+    height: 100vh;
+    padding: 2rem;
+  }
+
+  div.item-holder {
+    grid-template-columns: 1fr;
+    grid-gap: 1rem;
+    margin-bottom: 3rem;
+  }
 }
 </style>

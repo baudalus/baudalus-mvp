@@ -25,59 +25,62 @@
     <div class="mb-2rem">
       <InputText v-model="query" placeholder="Search for task" @input="filterTasks"/>
     </div>
-    <table>
-      <tr>
-        <th>Status</th>
-        <th>Name</th>
-        <th>Company</th>
-        <th>Duration</th>
-        <th>Start</th>
-        <th>End</th>
-        <th>Files</th>
-      </tr>
-      <tr
-          v-for="(task, idx) in filtered_tasks"
-          :key="`task_${idx}`"
-      >
-        <td class="status none" v-if="task.status === 'NONE'"/>
-        <td class="status done" v-if="task.status === 'DONE'">
-          <VueFeather type="check"/>
-        </td>
-        <td class="status warning" v-if="task.status === 'WARNING'">
-          <VueFeather type="alert-triangle"/>
-        </td>
-        <td class="status problem" v-if="task.status === 'PROBLEM'">
-          <VueFeather type="x"/>
-        </td>
-        <td>{{ task.name }}</td>
-        <td>{{ task.company }}</td>
-        <td>{{ task.duration }}</td>
-        <td>01. Oct</td>
-        <td>12. Oct</td>
-        <td>
-          <img
-              class="preview"
-              src="@/assets/projects/csm_Welcome-Forum_Schueco_01_9adb6ba882.jpeg"
-              alt="preview"
-              v-if="task.status !== 'NONE' && Math.random() > .95">
-          <img
-              class="preview"
-              src="@/assets/projects/csm_parkingservices_referenz_northgate_4c3b2565da.jpeg"
-              alt="preview"
-              v-if="task.status !== 'NONE' && Math.random() > .85">
-          <img
-              class="preview"
-              src="@/assets/projects/csm_parkhaus_MK8_gateway_gardens_27_886d255e7d.jpg"
-              alt="preview"
-              v-if="task.status !== 'NONE' && Math.random() > .75">
-          <img
-              class="preview"
-              src="@/assets/projects/csm_facilityservices_ref_dsvlogistik-krefeld_68310724bd.jpeg"
-              alt="preview"
-              v-if="task.status !== 'NONE' && Math.random() > .7">
-        </td>
-      </tr>
-    </table>
+    <div class="table-holder">
+
+      <table>
+        <tr>
+          <th>Status</th>
+          <th>Name</th>
+          <th>Company</th>
+          <th>Duration</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>Files</th>
+        </tr>
+        <tr
+            v-for="(task, idx) in filtered_tasks"
+            :key="`task_${idx}`"
+        >
+          <td class="status none" v-if="task.status === 'NONE'"/>
+          <td class="status done" v-if="task.status === 'DONE'">
+            <VueFeather type="check"/>
+          </td>
+          <td class="status warning" v-if="task.status === 'WARNING'">
+            <VueFeather type="alert-triangle"/>
+          </td>
+          <td class="status problem" v-if="task.status === 'PROBLEM'">
+            <VueFeather type="x"/>
+          </td>
+          <td>{{ task.name }}</td>
+          <td>{{ task.company }}</td>
+          <td>{{ task.duration }}</td>
+          <td>01. Oct</td>
+          <td>12. Oct</td>
+          <td>
+            <img
+                class="preview"
+                src="@/assets/projects/csm_Welcome-Forum_Schueco_01_9adb6ba882.jpeg"
+                alt="preview"
+                v-if="task.status !== 'NONE' && Math.random() > .95">
+            <img
+                class="preview"
+                src="@/assets/projects/csm_parkingservices_referenz_northgate_4c3b2565da.jpeg"
+                alt="preview"
+                v-if="task.status !== 'NONE' && Math.random() > .85">
+            <img
+                class="preview"
+                src="@/assets/projects/csm_parkhaus_MK8_gateway_gardens_27_886d255e7d.jpg"
+                alt="preview"
+                v-if="task.status !== 'NONE' && Math.random() > .75">
+            <img
+                class="preview"
+                src="@/assets/projects/csm_facilityservices_ref_dsvlogistik-krefeld_68310724bd.jpeg"
+                alt="preview"
+                v-if="task.status !== 'NONE' && Math.random() > .7">
+          </td>
+        </tr>
+      </table>
+    </div>
   </main>
 </template>
 
@@ -169,5 +172,20 @@ main div.filter-holder div.filter input[type=checkbox] {
 table img.preview {
   height: 2rem;
   margin-right: .4rem;
+}
+
+.table-holder {
+  width: 100%;
+  overflow: auto;
+}
+
+@media only screen and (max-device-width: 480px) {
+  main {
+    margin-top: 5rem;
+    width: 100%;
+    max-width: 100%;
+    transform: none;
+    padding: 2rem;
+  }
 }
 </style>

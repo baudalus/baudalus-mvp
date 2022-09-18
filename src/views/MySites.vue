@@ -7,7 +7,10 @@ import ButtonPrimary from "@/components/ButtonPrimary.vue";
   <main>
     <div class="mb-3rem">
       <ButtonPrimary @click="$router.push('/new')" icon="plus">New Site</ButtonPrimary>
-      <h1>My Sites</h1>
+      <div class="header">
+        <img src="@/assets/logo.svg" alt="Baudalus Logo"/>
+        <h1 class="mb-2rem">My Sites</h1>
+      </div>
     </div>
     <div class="mb-2rem">
       <InputText v-model="query" placeholder="Search for project"/>
@@ -117,4 +120,34 @@ div.item:nth-of-type(4) div.image{
 div.item:nth-of-type(5) div.image{
   background-image: url("@/assets/projects/csm_Welcome-Forum_Schueco_01_9adb6ba882.jpeg");
 }
+
+
+.header img{
+  height: 1.7rem;
+  opacity: 1;
+  margin-top: .5rem;
+  padding-right: 1rem;
+  margin-right: 1rem;
+  border-right: 6px solid #bebebe;
+}
+
+.header h1 {
+  display: inline-block;
+  margin: 0;
+}
+
+@media only screen and (max-device-width: 480px) {
+  main {
+    width: 100%;
+    height: 100vh;
+    padding: 2rem;
+  }
+
+  div.item-holder {
+    grid-template-columns: 1fr;
+    margin-bottom: 3rem;
+  }
+
+}
+
 </style>

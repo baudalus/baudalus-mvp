@@ -58,4 +58,29 @@ a.router-link-active .item {
   transform: scale(.95);
   box-shadow: 0 0 0 10px rgba(0,0,0,.015);
 }
+
+@media only screen and (max-device-width: 480px) {
+  .menu-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    padding: 2rem 2rem 1rem 2rem;
+  }
+  .menu-bar img {
+    margin-bottom: 0;
+  }
+  .menu-bar .menu{
+    display: inline-block;
+    float: right;
+  }
+  .menu-bar .menu i{
+    width: 1.3rem;
+  }
+
+  .menu-bar .menu div{
+    display: inline-block;
+    margin-left: 1rem;
+  }
+}
 </style>
