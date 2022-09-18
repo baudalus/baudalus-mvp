@@ -121,21 +121,7 @@ export default defineComponent({
       )
     },
     getTasks(): Task[] {
-      const tasks = TaskHolder.getUsedTasks()
-      let counter = 0
-      tasks.forEach(t => {
-        if (counter <= 5)
-          t.status = "DONE"
-        else if (counter > 5 && counter <= 9)
-          t.status = "WARNING"
-        else if (counter > 9 && counter <= 11)
-          t.status = "PROBLEM"
-        else
-          t.status = "NONE"
-        counter++
-      })
-      console.log(tasks)
-      return tasks as Task[]
+      return TaskHolder.getUsedTasks() as Task[]
     }
   }
 })

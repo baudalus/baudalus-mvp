@@ -4,6 +4,20 @@ div.vue-flow__node {
     width: 210px;
 }
 
+div.vue-flow__node.status-DONE {
+    background: #A8DCD1 !important;
+    border-color: #000000;
+}
+
+div.vue-flow__node.status-WARNING {
+    background: #FFD700 !important;
+}
+
+div.vue-flow__node.status-PROBLEM {
+    background: #e7573b !important;
+    color: #ffffff;
+}
+
 div.vue-flow__node:nth-of-type(5){
     width: 400px
 }
@@ -48,7 +62,10 @@ div.vue-flow__node:nth-of-type(28){
 }
 
 
-
+div.vue-flow__node[data-id="28"] {
+    cursor: e-resize;
+    transition: width 5s linear;
+}
 
 .vue-flow__edge-path {
     stroke-width: 10 !important;

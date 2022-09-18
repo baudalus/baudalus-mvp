@@ -1,10 +1,10 @@
 <template>
   <MenuBar/>
   <ButtonPrimary class="add-task" @click="displayPopUp">Add task</ButtonPrimary>
-  <div class="status-deadline">
-    <span class="info">Deadline: 29th May 2025</span>
-    <span class="icon">
-      <VueFeather type="check"/>
+  <div :class="'status-deadline' + (deadline !== '29th May 2025' ? ' pulse' : '')">
+    <span class="info">Deadline: {{deadline}}</span>
+    <span :class="'icon ' + deadlineIcon">
+      <VueFeather :type="deadlineIcon"/>
     </span>
   </div>
   <VueFlow
@@ -72,11 +72,46 @@ export default defineComponent({
         {title: "5 days", value: 5},
         {title: "6 days", value: 6},
         {title: "7 days", value: 7},
-      ]
+      ],
+      deadline: "29th May 2025",
+      deadlineIcon: "check"
     }
   },
   mounted() {
     this.elements = this.buildElements()
+
+    setTimeout(() => {
+      const box = document.querySelector('div.vue-flow__node[data-id="28"]') as HTMLElement
+      const deadlines = [
+          "29th May 2025",
+          "30th May 2025",
+          "31st May 2025",
+          "1st June 2025",
+          "7th June 2025",
+          "14th June 2025",
+          "21th June 2025",
+          "28th June 2025",
+          "1st July 2025",
+          "7th July 2025",
+          "8th July 2025",
+      ]
+      box?.addEventListener("click", (e) => {
+        box.style.width = "2000px"
+
+        let deadlineIndex = 0
+        const updateDeadlineinterval = setInterval(() => {
+          deadlineIndex ++
+
+          this.deadline = deadlines[deadlineIndex]
+
+          if(deadlineIndex >= 7)
+            this.deadlineIcon = "x"
+
+          if(deadlineIndex >= 10)
+            clearInterval(updateDeadlineinterval)
+        }, 500)
+      })
+    }, 500)
   },
   methods: {
     buildElements() {
@@ -104,6 +139,7 @@ export default defineComponent({
         id: '1',
         type: 'input',
         label: tasks["1"].name,
+        class: 'status-DONE',
         position: startPosition,
         sourcePosition: Position.Right
       })
@@ -166,6 +202,7 @@ export default defineComponent({
               position: newPosition,
               targetPosition: Position.Left,
               sourcePosition: Position.Right,
+              class: 'status-' + tasks[nodeId].status,
             }
             elements.push(newNode)
             positions[nodeId] = newPosition
@@ -197,7 +234,7 @@ export default defineComponent({
         start: "",
         end: "",
         status: "NONE",
-        duration: "4 Tage",
+        duration: "4 days",
       })
       //TaskHolder.addConnection(28, [125])
       this.elements = this.buildElements()
@@ -269,6 +306,10 @@ button.add-task {
   padding: .6rem 4rem .6rem 2rem;
   z-index: 10;
   overflow: hidden;
+  border: 3px solid #000000;
+}
+.status-deadline.pulse{
+  animation: pulse-black 1s infinite;
 }
 
 .status-deadline span.icon {
@@ -277,6 +318,27 @@ button.add-task {
   top: 0;
   background: #A8DCD1;
   padding: .6rem;
+}
+.status-deadline span.icon.x{
+  background: #e7573b;
+  color: #ffffff;
+}
+
+@keyframes pulse-black {
+  0% {
+    transform: translateX(-50%) scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+  }
+
+  70% {
+    transform: translateX(-50%) scale(1);
+    box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+  }
+
+  100% {
+    transform: translateX(-50%) scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
 }
 
 @media only screen and (max-device-width: 480px) {

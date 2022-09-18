@@ -14,7 +14,22 @@ export class TaskHolder {
      * Returns all tasks.
      */
     static getTasks() {
-        return this.tasks
+        const tasks = this.tasks as Task[]
+        let counter = 0;
+
+        tasks.forEach(t => {
+            if (counter <= 5)
+                t.status = "DONE"
+            else if (counter > 5 && counter <= 9)
+                t.status = "WARNING"
+            else if (counter > 9 && counter <= 11)
+                t.status = "PROBLEM"
+            else
+                t.status = "NONE"
+            counter++
+        })
+
+        return tasks
     }
 
     /**
@@ -119,15 +134,15 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Baustelleneinrichtung",
-            "duration": "123 Tage",
+            "duration": "123 days",
             "start": "Fre 27.11.20",
             "end": "Fre 28.05.21",
-            "company": "Dieters Baustellen GmBH"
+            "company": "Dieters Baustellen GmBH",
         },
         {
             "area": "",
             "name": "Erd- & Entwässerungsarbeiten",
-            "duration": "78 Tage",
+            "duration": "78 days",
             "start": "Mon 11.01.21",
             "end": "Fre 30.04.21",
             "company": "Fast Drainage work GmbH & Co.KG"
@@ -137,7 +152,7 @@ export class TaskHolder {
         {
             "area": "A",
             "name": "Anfüllen FU-Gräben vor GB Montage",
-            "duration": "10 Tage",
+            "duration": "10 days",
             "start": "Mon 11.01.21",
             "end": "Fre 22.01.21",
             "company": "Meier Montage KGaA"
@@ -145,7 +160,7 @@ export class TaskHolder {
         {
             "area": "A",
             "name": "Aushub Überfahren, Ausbildung Rampe, Verlegen Leerohre Schranke",
-            "duration": "1 Tag",
+            "duration": "1 day",
             "start": "Mon 11.01.21",
             "end": "Mon 11.01.21",
             "company": "Blitz Aushub GmBH"
@@ -153,7 +168,7 @@ export class TaskHolder {
         {
             "area": "A",
             "name": "Herstellen bis Feinplanum vor GB-Montage",
-            "duration": "5 Tage",
+            "duration": "5 days",
             "start": "Mon 25.01.21",
             "end": "Fre 29.01.21",
             "company": "Leonardos Feinplanung KG"
@@ -161,7 +176,7 @@ export class TaskHolder {
         {
             "area": "A",
             "name": "Umfahrung, Planum herstellen vor Gb Montage",
-            "duration": "2 Tage",
+            "duration": "2 days",
             "start": "Mon 18.01.21",
             "end": "Die 19.01.21",
             "company": "Super Duper Architect GmbH"
@@ -169,7 +184,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Grundleitung Achse O herstellen",
-            "duration": "2 Tage",
+            "duration": "2 days",
             "start": "Mon 22.03.21",
             "end": "Die 23.03.21",
             "company": "Goldbeck GmbH"
@@ -177,7 +192,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Grundleitung Achse A herstellen + Anfüllen Achse A",
-            "duration": "3 Tage",
+            "duration": "3 days",
             "start": "Mit 24.02.21",
             "end": "Fre 26.02.21",
             "company": "Goldbeck GmbH"
@@ -185,7 +200,7 @@ export class TaskHolder {
         {
             "area": "B/C",
             "name": "Anfüllen Innerhalb PH+ Feinplanum",
-            "duration": "5 Tage",
+            "duration": "5 days",
             "start": "Mon 29.03.21",
             "end": "Die 06.04.21",
             "company": "Goldbeck GmbH"
@@ -193,7 +208,7 @@ export class TaskHolder {
         {
             "area": "B",
             "name": "Pflasterarbeiten",
-            "duration": "15 Tage",
+            "duration": "15 days",
             "start": "Mon 12.04.21",
             "end": "Fre 30.04.21",
             "company": "Goldbeck GmbH"
@@ -201,7 +216,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Pflaster/Schrankenanlage Außenbereich",
-            "duration": "3 Tage",
+            "duration": "3 days",
             "start": "Mon 19.04.21",
             "end": "Mit 21.04.21",
             "company": "Baustellensecurity GmbH"
@@ -209,7 +224,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Rohbauarbeiten",
-            "duration": "74 Tage",
+            "duration": "74 days",
             "start": "Die 01.12.20",
             "end": "Don 18.03.21",
             "company": "Goldbeck GmbH"
@@ -217,7 +232,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "BE-Einrichtung",
-            "duration": "1 Tag",
+            "duration": "1 day",
             "start": "Die 01.12.20",
             "end": "Die 01.12.20",
             "company": "Baustellenaufbau GmbH"
@@ -225,7 +240,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Sauberkeitsschichten komplett",
-            "duration": "1 Tag",
+            "duration": "1 day",
             "start": "Don 03.12.20",
             "end": "Don 03.12.20",
             "company": "Sauberwisch AG"
@@ -233,7 +248,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Anlieferung Ankerplatten",
-            "duration": "1 Tag",
+            "duration": "1 day",
             "start": "Fre 04.12.20",
             "end": "Fre 04.12.20",
             "company": "Hendriks Transport KG"
@@ -241,7 +256,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Bewehren/Schalen Betonieren Achse 1 + A",
-            "duration": "4 Tage",
+            "duration": "4 days",
             "start": "Fre 04.12.20",
             "end": "Mit 09.12.20",
             "company": "Moritz Diestel und Söhne KG"
@@ -249,7 +264,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Achse H+TH",
-            "duration": "9 Tage",
+            "duration": "9 days",
             "start": "Don 10.12.20",
             "end": "Die 22.12.20",
             "company": "Goldbeck GmbH"
@@ -257,7 +272,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Achse O",
-            "duration": "4 Tage",
+            "duration": "4 days",
             "start": "Mon 04.01.21",
             "end": "Don 07.01.21",
             "company": "Goldbeck GmbH"
@@ -265,7 +280,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Überfahrt Achse 27 +1",
-            "duration": "4 Tage",
+            "duration": "4 days",
             "start": "Mon 11.01.21",
             "end": "Don 14.01.21",
             "company": "Goldbeck GmbH"
@@ -273,7 +288,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Verlegen Ringerder",
-            "duration": "1 Tag",
+            "duration": "1 day",
             "start": "Die 12.01.21",
             "end": "Die 12.01.21",
             "company": "Goldbeck GmbH"
@@ -281,7 +296,7 @@ export class TaskHolder {
         {
             "area": "ggf. 1BA vorziehen für Anfüllen Erdbau",
             "name": "Anschluss Ringerder",
-            "duration": "1 Tag",
+            "duration": "1 day",
             "start": "Don 18.03.21",
             "end": "Don 18.03.21",
             "company": "Goldbeck GmbH"
@@ -289,7 +304,7 @@ export class TaskHolder {
         {
             "area": "Termin noch offen;Qualität gü BH definiert?",
             "name": "Herstellung Mauerwerk Technikraum",
-            "duration": "8 Tage",
+            "duration": "8 days",
             "start": "Mit 17.02.21",
             "end": "Fre 26.02.21",
             "company": "Goldbeck GmbH"
@@ -297,7 +312,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Anlieferung Mauerwerk",
-            "duration": "1 Tag",
+            "duration": "1 day",
             "start": "Mit 17.02.21",
             "end": "Mit 17.02.21",
             "company": "Hendriks Transport KG"
@@ -305,7 +320,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Herstellung Mauerwerk",
-            "duration": "5 Tage",
+            "duration": "5 days",
             "start": "Mon 22.02.21",
             "end": "Fre 26.02.21",
             "company": "Mats Maurer GmbH"
@@ -313,7 +328,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "PH-Montage",
-            "duration": "46 Tage?",
+            "duration": "46 days?",
             "start": "Mit 27.01.21",
             "end": "Mit 31.03.21",
             "company": "Goldbeck GmbH"
@@ -321,7 +336,7 @@ export class TaskHolder {
         {
             "area": "DetailTerminplan von Mario in Erwartung",
             "name": "GB-Montage",
-            "duration": "46 Tage?",
+            "duration": "46 days?",
             "start": "Mit 27.01.21",
             "end": "Mit 31.03.21",
             "company": "Goldbeck GmbH"
@@ -329,7 +344,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "BE-Einrichung GB-Montage & Montage Stiftbolzenplatten",
-            "duration": "2 Tage",
+            "duration": "2 days",
             "start": "Mit 27.01.21",
             "end": "Don 28.01.21",
             "company": "Goldbeck GmbH"
@@ -337,7 +352,7 @@ export class TaskHolder {
         {
             "area": "Montage Fassade durch GB-Montage",
             "name": "Montage Treppenhaus",
-            "duration": "10 Tage",
+            "duration": "10 days",
             "start": "Die 02.02.21",
             "end": "Fre 19.03.21",
             "company": "Goldbeck GmbH"
@@ -345,7 +360,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Verguss TH spätestens fertig",
-            "duration": "1 Tag",
+            "duration": "1 day",
             "start": "Fre 19.03.21",
             "end": "Mon 22.03.21",
             "company": "Gustav Guss AG"
@@ -353,7 +368,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Stahlbau Achse A-0/7-17",
-            "duration": "6 Tage",
+            "duration": "6 days",
             "start": "Mon 08.02.21",
             "end": "Mon 15.02.21",
             "company": "Goldbeck GmbH"
@@ -361,7 +376,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Erddruckplatten Achse 17+H/7-17 + Träger",
-            "duration": "2 Tage",
+            "duration": "2 days",
             "start": "Mon 15.02.21",
             "end": "Die 16.02.21",
             "company": "Goldbeck GmbH"
@@ -369,7 +384,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "E1+E2 / 17-7 DP",
-            "duration": "1 Tag",
+            "duration": "1 day",
             "start": "Die 16.02.21",
             "end": "Die 16.02.21",
             "company": "Goldbeck GmbH"
@@ -377,7 +392,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Deckenträger E3-4 /17-7",
-            "duration": "1 Tag",
+            "duration": "1 day",
             "start": "Die 16.02.21",
             "end": "Die 16.02.21",
             "company": "Goldbeck GmbH"
@@ -385,7 +400,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "E3+E4 / 17-7 DP",
-            "duration": "1 Tag",
+            "duration": "1 day",
             "start": "Mit 17.02.21",
             "end": "Mit 17.02.21",
             "company": "Goldbeck GmbH"
@@ -393,7 +408,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Erddruckplatten Achse A 7-17",
-            "duration": "1 Tag",
+            "duration": "1 day",
             "start": "Don 25.02.21",
             "end": "Don 25.02.21",
             "company": "Goldbeck GmbH"
@@ -401,7 +416,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Montage UK TH",
-            "duration": "3 Tage",
+            "duration": "3 days",
             "start": "Don 25.02.21",
             "end": "Mon 01.03.21",
             "company": "Goldbeck GmbH"
@@ -409,7 +424,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Deckenträger E5+6 / 17-7",
-            "duration": "2 Tage",
+            "duration": "2 days",
             "start": "Mon 22.02.21",
             "end": "Die 23.02.21",
             "company": "Goldbeck GmbH"
@@ -417,7 +432,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "E5+E6 /17-12 DP",
-            "duration": "1 Tag?",
+            "duration": "1 day?",
             "start": "Die 23.02.21",
             "end": "Die 23.02.21",
             "company": "Goldbeck GmbH"
@@ -425,7 +440,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Deckenträger E7+8 /17-12 + Rampendach",
-            "duration": "1 Tag",
+            "duration": "1 day",
             "start": "Die 23.02.21",
             "end": "Die 23.02.21",
             "company": "Goldbeck GmbH"
@@ -433,7 +448,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "E7+E8 /17-12 DP",
-            "duration": "1 Tag?",
+            "duration": "1 day?",
             "start": "Mit 24.02.21",
             "end": "Mit 24.02.21",
             "company": "Goldbeck GmbH"
@@ -441,7 +456,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "E3+E4 /12-7 DP",
-            "duration": "1 Tag?",
+            "duration": "1 day?",
             "start": "Mon 01.03.21",
             "end": "Mon 01.03.21",
             "company": "Goldbeck GmbH"
@@ -449,7 +464,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Deckenträger E5+6 /12-7",
-            "duration": "1 Tag?",
+            "duration": "1 day?",
             "start": "Mon 01.03.21",
             "end": "Mon 01.03.21",
             "company": "Goldbeck GmbH"
@@ -457,7 +472,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "E5+E6 /17-12 DP",
-            "duration": "2 Tage",
+            "duration": "2 days",
             "start": "Die 02.03.21",
             "end": "Die 16.03.21",
             "company": "Goldbeck GmbH"
@@ -465,7 +480,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Deckenträger E7+8 /12-7",
-            "duration": "1 Tag?",
+            "duration": "1 day?",
             "start": "Die 02.03.21",
             "end": "Die 02.03.21",
             "company": "Goldbeck GmbH"
@@ -473,7 +488,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "E7+E8 /17-12 DP",
-            "duration": "1 Tag?",
+            "duration": "1 day?",
             "start": "Mit 03.03.21",
             "end": "Mit 03.03.21",
             "company": "Goldbeck GmbH"
@@ -481,7 +496,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Erddruckplatten Achse A 1-7/1 A-J/H 1-7",
-            "duration": "1 Tag?",
+            "duration": "1 day?",
             "start": "Don 04.03.21",
             "end": "Don 04.03.21",
             "company": "Meier Montage KGaA"
@@ -489,7 +504,7 @@ export class TaskHolder {
         {
             "area": "2.Abschnitt Stahl",
             "name": "Stahl A-O/7-1",
-            "duration": "4 Tage?",
+            "duration": "4 days?",
             "start": "Mon 08.03.21",
             "end": "Don 11.03.21",
             "company": "Goldbeck GmbH"
@@ -497,7 +512,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "E1+E2 /7-1 DP",
-            "duration": "1 Tag?",
+            "duration": "1 day?",
             "start": "Mon 15.03.21",
             "end": "Mon 15.03.21",
             "company": "Goldbeck GmbH"
@@ -505,7 +520,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Deckenträger E3+4/7-1",
-            "duration": "1 Tag?",
+            "duration": "1 day?",
             "start": "Die 16.03.21",
             "end": "Die 16.03.21",
             "company": "Goldbeck GmbH"
@@ -513,7 +528,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "E3+E4 /7-1 DP",
-            "duration": "2 Tage?",
+            "duration": "2 days?",
             "start": "Mit 17.03.21",
             "end": "Don 18.03.21",
             "company": "Goldbeck GmbH"
@@ -521,7 +536,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Deckenträger E5+6/7-1",
-            "duration": "1 Tag?",
+            "duration": "1 day?",
             "start": "Mon 22.03.21",
             "end": "Mon 22.03.21",
             "company": "Goldbeck GmbH"
@@ -529,7 +544,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Deckenträger E7+8/7-1 + Rampendach",
-            "duration": "1 Tag?",
+            "duration": "1 day?",
             "start": "Die 23.03.21",
             "end": "Die 23.03.21",
             "company": "Goldbeck GmbH"
@@ -537,7 +552,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Deckenträger E7+8/7-1 + Rampendach",
-            "duration": "1 Tag?",
+            "duration": "1 day?",
             "start": "Mit 24.03.21",
             "end": "Mit 24.03.21",
             "company": "Goldbeck GmbH"
@@ -545,7 +560,7 @@ export class TaskHolder {
         {
             "area": "GBMontage 25.3 durch",
             "name": "E7+E8 /7-1 DP",
-            "duration": "2 Tage?",
+            "duration": "2 days?",
             "start": "Mit 24.03.21",
             "end": "Don 25.03.21",
             "company": "Goldbeck GmbH"
@@ -553,7 +568,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Räumung PH +BE; Fertigstellung Verguss",
-            "duration": "3 Tage?",
+            "duration": "3 days?",
             "start": "Mon 29.03.21",
             "end": "Mit 31.03.21",
             "company": "Gustav Guss KG"
@@ -561,7 +576,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Sützenkonservierung",
-            "duration": "17 Tage",
+            "duration": "17 days",
             "start": "Die 23.02.21",
             "end": "Mit 17.03.21",
             "company": "Sauberwisch AG"
@@ -569,7 +584,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "1.BA",
-            "duration": "8 Tage",
+            "duration": "8 days",
             "start": "Die 23.02.21",
             "end": "Don 04.03.21",
             "company": "Goldbeck GmbH"
@@ -577,7 +592,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "2.BA",
-            "duration": "4 Tage",
+            "duration": "4 days",
             "start": "Fre 12.03.21",
             "end": "Mit 17.03.21",
             "company": "Goldbeck GmbH"
@@ -585,7 +600,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Kugelstrahler",
-            "duration": "2 Tage",
+            "duration": "2 days",
             "start": "Mit 31.03.21",
             "end": "Mon 05.04.21",
             "company": "Kugels Strahler GmbH"
@@ -593,7 +608,7 @@ export class TaskHolder {
         {
             "area": "!Migua eingebaut",
             "name": "Plattenstoßbeschichtung",
-            "duration": "15 Tage",
+            "duration": "15 days",
             "start": "Die 06.04.21",
             "end": "Mon 26.04.21",
             "company": "Sauberwisch AG"
@@ -601,7 +616,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Ausbaugewerke",
-            "duration": "70 Tage?",
+            "duration": "70 days?",
             "start": "Don 28.01.21",
             "end": "Fre 07.05.21",
             "company": "Goldbeck GmbH"
@@ -609,7 +624,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Lieferung Lichtkuppel",
-            "duration": "1 Tag",
+            "duration": "1 day",
             "start": "Mon 08.03.21",
             "end": "Mon 08.03.21",
             "company": "Meiers Transport AG"
@@ -617,7 +632,7 @@ export class TaskHolder {
         {
             "area": "Fassadenelemente erst ab KW14 abrufbar!",
             "name": "Montage PH-Fassade",
-            "duration": "20 Tage",
+            "duration": "20 days",
             "start": "Die 06.04.21",
             "end": "Mon 03.05.21",
             "company": "Goldbeck GmbH"
@@ -625,7 +640,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Dachblechverleger Rampendach",
-            "duration": "5 Tage",
+            "duration": "5 days",
             "start": "Die 06.04.21",
             "end": "Mon 12.04.21",
             "company": "Goldbeck GmbH"
@@ -633,7 +648,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Dacheindichtung TH",
-            "duration": "5 Tage",
+            "duration": "5 days",
             "start": "Die 06.04.21",
             "end": "Mon 12.04.21",
             "company": "Dieter Dicht AG"
@@ -641,7 +656,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "TH Profilbauglas-Fassade",
-            "duration": "5 Tage",
+            "duration": "5 days",
             "start": "Mon 29.03.21",
             "end": "Die 06.04.21",
             "company": "Joachims Fassadenbau KG"
@@ -649,7 +664,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Türen",
-            "duration": "53 Tage",
+            "duration": "53 days",
             "start": "Mit 17.02.21",
             "end": "Die 04.05.21",
             "company": "Schüco International KG"
@@ -657,7 +672,7 @@ export class TaskHolder {
         {
             "area": "erfolgt",
             "name": "Aufmaß Türen TH",
-            "duration": "0 Tage",
+            "duration": "0 days",
             "start": "Mit 17.02.21",
             "end": "Mit 17.02.21",
             "company": "Schüco International KG"
@@ -665,7 +680,7 @@ export class TaskHolder {
         {
             "area": "für 26.3 lieferung geplant",
             "name": "Rohmontage",
-            "duration": "5 Tage",
+            "duration": "5 days",
             "start": "Mon 12.04.21",
             "end": "Fre 16.04.21",
             "company": "Björns Lieferservice KG"
@@ -673,7 +688,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Feinmontage",
-            "duration": "2 Tage",
+            "duration": "2 days",
             "start": "Mon 03.05.21",
             "end": "Die 04.05.21",
             "company": "Goldbeck GmbH"
@@ -681,7 +696,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Maler",
-            "duration": "10 Tage",
+            "duration": "10 days",
             "start": "Mon 19.04.21",
             "end": "Fre 30.04.21",
             "company": "Alfred Maler KG"
@@ -689,7 +704,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Türen TH",
-            "duration": "4 Tage",
+            "duration": "4 days",
             "start": "Die 27.04.21",
             "end": "Fre 30.04.21",
             "company": "Schüco International KG"
@@ -697,7 +712,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Wand Technikraum",
-            "duration": "3 Tage",
+            "duration": "3 days",
             "start": "Mon 19.04.21",
             "end": "Mit 21.04.21",
             "company": "Schüco International KG"
@@ -705,7 +720,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Elektroinstallation",
-            "duration": "68 Tage?",
+            "duration": "68 days?",
             "start": "Don 28.01.21",
             "end": "Mit 05.05.21",
             "company": "Mokelke Installations GmbH "
@@ -713,7 +728,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Abruf Elektrokleinteile",
-            "duration": "1 Tag",
+            "duration": "1 day",
             "start": "Don 28.01.21",
             "end": "Don 28.01.21",
             "company": "Goldbeck GmbH"
@@ -721,7 +736,7 @@ export class TaskHolder {
         {
             "area": "kommt am 26.2",
             "name": "Kabelzug TH",
-            "duration": "1 Tag",
+            "duration": "1 day",
             "start": "Fre 26.02.21",
             "end": "Fre 26.02.21",
             "company": "Mokelke Installations GmbH"
@@ -729,7 +744,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Montage Beleuchtung Parkebenen 1.BA",
-            "duration": "1 Tag",
+            "duration": "1 day",
             "start": "Don 18.03.21",
             "end": "Don 18.03.21",
             "company": "Mokelke Installations GmbH"
@@ -737,7 +752,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Installation Verteilung/Kabelzug",
-            "duration": "10 Tage",
+            "duration": "10 days",
             "start": "Mon 15.03.21",
             "end": "Fre 26.03.21",
             "company": "Mokelke Installations GmbH"
@@ -745,7 +760,7 @@ export class TaskHolder {
         {
             "area": "Lieferung Originalstrom BH abstimmen",
             "name": "Inbetriebnahme",
-            "duration": "1 Tag",
+            "duration": "1 day",
             "start": "Mon 03.05.21",
             "end": "Mon 03.05.21",
             "company": "Goldbeck GmbH"
@@ -753,7 +768,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Tür TH",
-            "duration": "1 Tag",
+            "duration": "1 day",
             "start": "Mon 19.04.21",
             "end": "Mon 19.04.21",
             "company": "Schüco International KG"
@@ -761,7 +776,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Schlosser",
-            "duration": "61 Tage?",
+            "duration": "61 days?",
             "start": "Don 04.02.21",
             "end": "Mon 03.05.21",
             "company": "Mokelke Installations GmbH"
@@ -769,7 +784,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "TH Geländer",
-            "duration": "8 Tage",
+            "duration": "8 days",
             "start": "Don 04.02.21",
             "end": "Mon 15.02.21",
             "company": "Asendorfs Geländer KG"
@@ -777,7 +792,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Restarbeiten, Bleche",
-            "duration": "1 Tag?",
+            "duration": "1 day?",
             "start": "Mon 03.05.21",
             "end": "Mon 03.05.21",
             "company": "Mokelke Installations GmbH"
@@ -785,7 +800,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "PH-Entwässerung",
-            "duration": "16 Tage",
+            "duration": "16 days",
             "start": "Die 16.03.21",
             "end": "Don 08.04.21",
             "company": "Mokelke Installations GmbH"
@@ -793,7 +808,7 @@ export class TaskHolder {
         {
             "area": "Material heben in der Woche vom 8.3 ",
             "name": "Montage 1.BA",
-            "duration": "3 Tage",
+            "duration": "3 days",
             "start": "Die 16.03.21",
             "end": "Don 18.03.21",
             "company": "Goldbeck GmbH"
@@ -801,7 +816,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Montage 2.BA",
-            "duration": "3 Tage",
+            "duration": "3 days",
             "start": "Die 06.04.21",
             "end": "Don 08.04.21",
             "company": "Goldbeck GmbH"
@@ -809,7 +824,7 @@ export class TaskHolder {
         {
             "area": "als Vorleistung Anfüllen EDP und Entwässerung",
             "name": "Kernbohrungen für Entwässerung Achse A",
-            "duration": "1 Tag",
+            "duration": "1 day",
             "start": "Die 16.03.21",
             "end": "Die 16.03.21",
             "company": "Mokelke Installations GmbH"
@@ -817,7 +832,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Blitzschutz",
-            "duration": "1 Tag",
+            "duration": "1 day",
             "start": "Mon 19.04.21",
             "end": "Mon 19.04.21",
             "company": "Blitzfrei AG"
@@ -825,7 +840,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Abdichtungsarbeiten",
-            "duration": "49 Tage",
+            "duration": "49 days",
             "start": "Fre 26.02.21",
             "end": "Fre 07.05.21",
             "company": "Mokelke Installations GmbH"
@@ -833,7 +848,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "PU-Abdichtung TH außen",
-            "duration": "2 Tage",
+            "duration": "2 days",
             "start": "Mon 15.03.21",
             "end": "Die 16.03.21",
             "company": "Dieter Dicht und Söhne KGaA"
@@ -841,7 +856,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "PU-Abdichtung TH innen",
-            "duration": "3 Tage",
+            "duration": "3 days",
             "start": "Mit 05.05.21",
             "end": "Fre 07.05.21",
             "company": ""
@@ -849,7 +864,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "PU Abdichtung Erddruckplatten",
-            "duration": "2 Tage",
+            "duration": "2 days",
             "start": "Mon 15.03.21",
             "end": "Die 16.03.21",
             "company": "Dieter Dicht und Söhne KGaA"
@@ -857,7 +872,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Sockelabdichtung TH",
-            "duration": "1 Tag",
+            "duration": "1 day",
             "start": "Fre 26.02.21",
             "end": "Fre 26.02.21",
             "company": "Dieter Dicht und Söhne KGaA"
@@ -865,7 +880,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Miguaprofile",
-            "duration": "21 Tage",
+            "duration": "21 days",
             "start": "Die 16.03.21",
             "end": "Don 15.04.21",
             "company": "Dieter Dicht und Söhne KGaA"
@@ -873,7 +888,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Rohmontage",
-            "duration": "1 Tag",
+            "duration": "1 day",
             "start": "Die 16.03.21",
             "end": "Die 16.03.21",
             "company": "Goldbeck GmbH"
@@ -881,7 +896,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Einbau Dichtungen",
-            "duration": "2 Tage",
+            "duration": "2 days",
             "start": "Mit 14.04.21",
             "end": "Don 15.04.21",
             "company": "Dieter Dicht und Söhne KGaA"
@@ -889,7 +904,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Schrankenanlage",
-            "duration": "2 Tage",
+            "duration": "2 days",
             "start": "Mon 26.04.21",
             "end": "Die 27.04.21",
             "company": "Erich Schranker AG"
@@ -897,7 +912,7 @@ export class TaskHolder {
         {
             "area": "vor Rohbau Technikraum",
             "name": "Brandschutz Träger Technikraum",
-            "duration": "1 Tag",
+            "duration": "1 day",
             "start": "Don 18.02.21",
             "end": "Don 18.02.21",
             "company": "Goldbeck GmbH"
@@ -905,7 +920,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Markierungen",
-            "duration": "2 Tage",
+            "duration": "2 days",
             "start": "Mon 03.05.21",
             "end": "Die 04.05.21",
             "company": "Goldbeck GmbH"
@@ -913,7 +928,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Beschilderung",
-            "duration": "2 Tage",
+            "duration": "2 days",
             "start": "Mon 03.05.21",
             "end": "Die 04.05.21",
             "company": "Leons Schilder KG"
@@ -921,7 +936,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Endreinigung",
-            "duration": "3 Tage",
+            "duration": "3 days",
             "start": "Mit 05.05.21",
             "end": "Fre 07.05.21",
             "company": "Sauberwisch KG"
@@ -929,7 +944,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Intern - GB - Bauleitung",
-            "duration": "132 Tage",
+            "duration": "132 days",
             "start": "Die 27.10.20",
             "end": "Fre 07.05.21",
             "company": "Goldbeck GmbH"
@@ -937,7 +952,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Vorab-Begehung PL/BL",
-            "duration": "0 Tage",
+            "duration": "0 days",
             "start": "Die 27.10.20",
             "end": "Die 27.10.20",
             "company": "Goldbeck GmbH"
@@ -945,7 +960,7 @@ export class TaskHolder {
         {
             "area": "abgerufen für 3.12",
             "name": "Abruf Ankerplatten",
-            "duration": "0 Tage",
+            "duration": "0 days",
             "start": "Don 26.11.20",
             "end": "Don 26.11.20",
             "company": "Goldbeck GmbH"
@@ -953,7 +968,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Urlaub BL",
-            "duration": "5 Tage",
+            "duration": "5 days",
             "start": "Mon 16.11.20",
             "end": "Fre 20.11.20",
             "company": "Goldbeck GmbH"
@@ -961,7 +976,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Urlaub BL",
-            "duration": "5 Tage",
+            "duration": "5 days",
             "start": "Mit 02.12.20",
             "end": "Die 08.12.20",
             "company": "Goldbeck GmbH"
@@ -969,7 +984,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Urlaub BL",
-            "duration": "3 Tage",
+            "duration": "3 days",
             "start": "Don 24.12.20",
             "end": "Don 31.12.20",
             "company": "Goldbeck GmbH"
@@ -977,7 +992,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Urlaub BL",
-            "duration": "5 Tage",
+            "duration": "5 days",
             "start": "Mon 08.03.21",
             "end": "Fre 12.03.21",
             "company": "Goldbeck GmbH"
@@ -985,7 +1000,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Urlaub BL",
-            "duration": "4 Tage",
+            "duration": "4 days",
             "start": "Mon 29.03.21",
             "end": "Don 01.04.21",
             "company": "Goldbeck GmbH"
@@ -993,7 +1008,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "geplante Fertigstellung",
-            "duration": "0 Tage",
+            "duration": "0 days",
             "start": "Fre 07.05.21",
             "end": "Fre 07.05.21",
             "company": "Goldbeck GmbH"
@@ -1009,7 +1024,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Leistungen - BH",
-            "duration": "22 Tage",
+            "duration": "22 days",
             "start": "Die 27.10.20",
             "end": "Don 26.11.20",
             "company": "Goldbeck GmbH"
@@ -1017,7 +1032,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Herrichten Baugrube",
-            "duration": "22 Tage",
+            "duration": "22 days",
             "start": "Die 27.10.20",
             "end": "Mit 25.11.20",
             "company": "Goldbeck GmbH"
@@ -1025,7 +1040,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Baufeldübergabe an GB",
-            "duration": "0 Tage",
+            "duration": "0 days",
             "start": "Don 26.11.20",
             "end": "Don 26.11.20",
             "company": "Goldbeck GmbH"
@@ -1041,7 +1056,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Abnahmen",
-            "duration": "1 Tag?",
+            "duration": "1 day?",
             "start": "Mon 12.10.20",
             "end": "Mon 12.10.20",
             "company": "Goldbeck GmbH"
@@ -1049,7 +1064,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Konformiät Brandschutz",
-            "duration": "1 Tag?",
+            "duration": "1 day?",
             "start": "Mon 12.10.20",
             "end": "Mon 12.10.20",
             "company": "Goldbeck GmbH"
@@ -1057,7 +1072,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Bauherren-Abnahme",
-            "duration": "1 Tag?",
+            "duration": "1 day?",
             "start": "Mon 12.10.20",
             "end": "Mon 12.10.20",
             "company": "Founders Foundation gGmbH"
@@ -1065,7 +1080,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Behördliche Abnahme",
-            "duration": "1 Tag?",
+            "duration": "1 day?",
             "start": "Mon 12.10.20",
             "end": "Mon 12.10.20",
             "company": "Bauamt GbR"
@@ -1073,7 +1088,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "<Neuer Vorgang>",
-            "duration": "1 Tag?",
+            "duration": "1 day?",
             "start": "Mon 12.10.20",
             "end": "Mon 12.10.20",
             "company": "Goldbeck GmbH"
@@ -1089,7 +1104,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Vertragstermine",
-            "duration": "175 Tage?",
+            "duration": "175 days?",
             "start": "Mon 12.10.20",
             "end": "Fre 25.06.21",
             "company": "Goldbeck GmbH"
@@ -1097,7 +1112,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "vert. Baubeginn/Übergabe Baugrube",
-            "duration": "0 Tage",
+            "duration": "0 days",
             "start": "Mon 04.01.21",
             "end": "Mon 04.01.21",
             "company": "Goldbeck GmbH"
@@ -1105,7 +1120,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "Bauzeitverlängerung",
-            "duration": "1 Tag?",
+            "duration": "1 day?",
             "start": "Mon 12.10.20",
             "end": "Mon 12.10.20",
             "company": "Goldbeck GmbH"
@@ -1113,7 +1128,7 @@ export class TaskHolder {
         {
             "area": "",
             "name": "vert. Fertigstellung",
-            "duration": "0 Tage",
+            "duration": "0 days",
             "start": "Fre 25.06.21",
             "end": "Fre 25.06.21",
             "company": "Goldbeck GmbH"
