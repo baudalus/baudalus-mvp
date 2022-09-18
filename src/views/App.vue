@@ -95,19 +95,28 @@ export default defineComponent({
           "7th July 2025",
           "8th July 2025",
       ]
+      const startPosition = {x: 0, y: 0}
       box?.addEventListener("click", (e) => {
-        box.style.width = "2000px"
 
+        const frameRate = 10
         let deadlineIndex = 0
-        const updateDeadlineinterval = setInterval(() => {
-          deadlineIndex ++
+        const updateBoxWidthInterval = setInterval(() => {
+          if(Math.random() > 0.7)
+            box.style.width = (400 + (100/frameRate) * deadlineIndex) +"px"
 
-          this.deadline = deadlines[deadlineIndex]
-
-          if(deadlineIndex >= 7)
+          if(deadlineIndex >= 7*2*frameRate)
             this.deadlineIcon = "x"
 
-          if(deadlineIndex >= 10)
+          if(deadlineIndex >= 8*2*frameRate)
+            clearInterval(updateBoxWidthInterval)
+
+          deadlineIndex ++
+        }, 250 / frameRate)
+        const updateDeadlineinterval = setInterval(() => {
+
+          this.deadline = deadlines[Math.floor(deadlineIndex/(2*frameRate))]
+
+          if(deadlineIndex >= 10*2*frameRate)
             clearInterval(updateDeadlineinterval)
         }, 500)
       })

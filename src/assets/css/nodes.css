@@ -64,7 +64,6 @@ div.vue-flow__node:nth-of-type(28){
 
 div.vue-flow__node[data-id="28"] {
     cursor: e-resize;
-    transition: width 5s linear;
 }
 
 .vue-flow__edge-path {
